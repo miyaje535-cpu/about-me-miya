@@ -1,0 +1,514 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>About Me - Miya Je</title>  
+
+<style>  
+    * {  
+        box-sizing: border-box;  
+    }  
+
+    body {  
+        font-family: Arial, sans-serif;  
+        margin: 25px;  
+        color: #243b2d;  
+    }  
+
+    h1, h2 {  
+        color: #245c3a;  
+    }  
+
+    a {  
+        color: #287a48;  
+    }  
+
+    table {  
+        border-collapse: collapse;  
+        width: 100%;  
+    }  
+
+    th, td {  
+        border: 1px solid #245c3a;  
+        padding: 8px;  
+        text-align: left;  
+    }  
+
+    th {  
+        background-color: #d8f3dc;  
+    }  
+
+    /* BUTTONS */  
+    #openBtn, #backBtn {  
+        background-color: #245c3a;  
+        color: white;  
+        border: 2px solid #b7e4c7;  
+        border-radius: 25px;  
+        padding: 12px 24px;  
+        font-size: 16px;  
+        cursor: pointer;  
+        font-family: Georgia, serif;  
+    }  
+
+    #openBtn:hover, #backBtn:hover {  
+        background-color: #183d29;  
+    }  
+
+    .button-container {  
+        text-align: center;  
+        margin: 35px 0;  
+    }  
+
+    /* INTERSTELLAR QUOTE SCREEN */  
+    #quoteScreen {  
+        display: none;  
+        position: fixed;  
+        inset: 0;  
+        z-index: 10000;  
+
+        background:  
+            radial-gradient(  
+                ellipse at 50% 43%,  
+                rgba(43, 82, 55, 0.55),  
+                transparent 68%  
+            ),  
+            linear-gradient(  
+                145deg,  
+                #18251c,  
+                #0c1711 55%,  
+                #14251a  
+            );  
+
+        color: #f5f5ee;  
+        flex-direction: column;  
+        justify-content: center;  
+        align-items: center;  
+        text-align: center;  
+        padding: 30px;  
+        overflow-y: auto;  
+    }  
+
+    .quote-label {  
+        font-family: Arial, sans-serif;  
+        font-size: 13px;  
+        letter-spacing: 4px;  
+        color: #e4e8df;  
+        margin: 0 0 45px;  
+    }  
+
+    .main-quote {  
+        color: #f5f5ee;  
+        font-family: Georgia, serif;  
+        font-size: clamp(28px, 4.5vw, 48px);  
+        line-height: 1.45;  
+        max-width: 850px;  
+        margin: 0 0 30px;  
+    }  
+
+    .quote-author {  
+        font-family: Arial, sans-serif;  
+        font-size: 17px;  
+        font-style: italic;  
+        margin: 0 0 65px;  
+    }  
+
+    #additionalBtn {  
+        background: transparent;  
+        color: white;  
+        border: 2px solid #f5f5ee;  
+        border-radius: 35px;  
+        padding: 13px 32px;  
+        font-size: 17px;  
+        cursor: pointer;  
+        transition: background 0.3s, color 0.3s;  
+    }  
+
+    #additionalBtn:hover {  
+        background: #f5f5ee;  
+        color: #14251a;  
+    }  
+
+    /* PERSONAL STORY SCREEN */  
+    #more {  
+        display: none;  
+        position: fixed;  
+        inset: 0;  
+        z-index: 9999;  
+        background-color: #d8f3dc;  
+        color: #1b4332;  
+        padding: 25px 20px;  
+        overflow-y: auto;  
+        flex-direction: column;  
+        align-items: center;  
+        justify-content: center;  
+        text-align: center;  
+    }  
+
+    #more h1 {  
+        font-family: Georgia, serif;  
+        font-size: 30px;  
+        color: #245c3a;  
+    }  
+
+    #typingText {  
+        font-family: Georgia, serif;  
+        font-size: 17px;  
+        line-height: 1.9;  
+        max-width: 650px;  
+        width: 100%;  
+        white-space: pre-wrap;  
+        overflow-wrap: anywhere;  
+        margin: 10px auto 25px;  
+    }  
+
+    .cursor {  
+        display: inline-block;  
+        animation: blink 0.7s infinite;  
+        font-weight: bold;  
+        margin-bottom: 20px;  
+    }  
+
+    @keyframes blink {  
+        50% {  
+            opacity: 0;  
+        }  
+    }  
+
+    /* MOBILE */  
+    @media (max-width: 600px) {  
+        body {  
+            margin: 15px;  
+        }  
+
+        .quote-label {  
+            font-size: 10px;  
+            letter-spacing: 2px;  
+            margin-bottom: 35px;  
+        }  
+
+        .main-quote {  
+            font-size: 28px;  
+            line-height: 1.5;  
+        }  
+
+        .quote-author {  
+            font-size: 15px;  
+            margin-bottom: 50px;  
+        }  
+
+        #quoteScreen {  
+            padding: 25px;  
+        }  
+
+        #more {  
+            justify-content: flex-start;  
+            padding-top: 25px;  
+        }  
+
+        #more h1 {  
+            font-size: 25px;  
+        }  
+
+        #typingText {  
+            font-size: 16px;  
+            line-height: 1.8;  
+        }  
+
+        th, td {  
+            padding: 6px;  
+            font-size: 14px;  
+        }  
+    }  
+</style>
+
+</head>  <body>  <!-- FIRST SONG -->
+
+<audio id="firstMusic" loop preload="auto">  
+    <source src="./first-song.mp3.mp3" type="audio/mpeg">  
+</audio>  <!-- ABOUT ME PAGE -->  
+<h1>About Me</h1>  
+
+<p>  
+    My name is Miya Je G. Soldivillo, a Grade 10 student with a curious mind, a creative side, and a love for discovering new things. Science fascinates me. Perhaps that's part of why I'm so fond of science fiction. I keep my friendships close because, to me, the people who make life meaningful are worth keeping.
+Through ICT, I hope to refine my coding skills,
+and create things that once existed only in my imagination.
+
+</p>  
+
+<hr>  
+
+<p>  
+    School: Negros Oriental High School<br>  
+    Favorite Subject: Science<br>  
+    Dream Career: Pediatrician  
+</p>  
+
+<h2>My Hobbies</h2>  
+
+<ul>  
+    <li>Listening to music</li>  
+    <li>Playing badminton</li>  
+    <li>Playing online games</li>  
+    <li>Binge-watching movies</li>  
+    <li>Playing keyboard and guitar</li>  
+    <li>Creating playlists for every mood</li>  
+    <li>Reading classic literature</li>  
+</ul>  
+
+<h2>My Morning Routine</h2>  
+
+<ol>  
+    <li>Wake up and get out of bed</li>  
+    <li>Say a little prayer</li>  
+    <li>Check my phone</li>  
+    <li>Eat breakfast</li>  
+    <li>Take a bath and get ready</li>  
+    <li>Go to school</li>  
+</ol>  
+
+<h2>Educational Link</h2>  
+
+<p>  
+    <a href="https://www.w3schools.com"  
+       target="_blank"  
+       rel="noopener noreferrer">  
+        Visit W3Schools  
+    </a>  
+</p>  
+
+<h2>My Learning Record</h2>  
+
+<table>  
+    <tr>  
+        <th>Subject</th>  
+        <th>What I Learned</th>  
+    </tr>  
+    <tr>  
+        <td>Filipino</td>  
+        <td>Prose and non-prose literary works and their elements</td>  
+    </tr>  
+    <tr>  
+        <td>Science</td>  
+        <td>Biotechnology and the carrying capacity of ecosystems</td>  
+    </tr>  
+    <tr>  
+        <td>Araling Panlipunan</td>  
+        <td>Gender concepts and political issues</td>  
+    </tr>  
+    <tr>  
+        <td>English</td>  
+        <td>Literary criticism and different critical approaches</td>  
+    </tr>  
+    <tr>  
+        <td>Mathematics</td>  
+        <td>Radicals and solving mathematical problems</td>  
+    </tr>  
+    <tr>  
+        <td>Values Education</td>  
+        <td>The roles and responsibilities of parents</td>  
+    </tr>  
+    <tr>  
+        <td>MAPEH</td>  
+        <td>Physical fitness, health, music, and arts</td>  
+    </tr>  
+    <tr>  
+        <td>ICT</td>  
+        <td>Basic HTML programming</td>  
+    </tr>  
+</table>  
+
+<!-- BUTTON TO OPEN THE QUOTE -->  
+<div class="button-container">  
+    <button id="openBtn" type="button" onclick="showQuote()">  
+        Click For More   
+    </button>  
+</div>  
+
+<!-- QUOTE SCREEN -->  
+<div id="quoteScreen">  
+
+    <p class="quote-label">  
+        My fave line in Interstellar  
+    </p>  
+
+    <h1 class="main-quote">  
+        “Time is relative; it can stretch and squeeze,  
+        but it can't run backwards.”  
+    </h1>  
+
+    <p class="quote-author">  
+        — Interstellar (2014)  
+    </p>  
+
+    <button id="additionalBtn"  
+            type="button"  
+            onclick="openMore()">  
+        additional...  
+    </button>  
+
+</div>  
+
+<!-- PERSONAL STORY SCREEN -->  
+<div id="more">  
+
+    <h1>Nothing But a Prose</h1>  
+
+    <p id="typingText"></p>  
+
+    <span id="cursor" class="cursor">|</span>  
+
+    <button id="backBtn"  
+            type="button"  
+            onclick="closeMore()">  
+        Back to About Me   
+    </button>  
+
+</div>  
+
+<!-- SECOND SONG -->
+
+<audio id="secondMusic" loop preload="auto">  
+    <source src="./second-song.mp3.mp3" type="audio/mpeg">  
+</audio>  <script>  
+    // PERSONAL STORY  
+    const message = `I've always thought it was strange how a moment can feel ordinary while you're living it, then become something you'd give anything to experience one more time.
+
+Maybe that's why I've always had a hard time with change. I think I'm just afraid of what comes with it: the goodbyes, the unfamiliar places, and the little things that become memories before you even realize they're changing.
+
+Transferring taught me that life doesn't always let you stay where you're comfortable. I've met wonderful people along the way, but there are still days when I miss the people and moments I left behind.
+
+I think you can be happy with where you are and still miss where you've been. I guess one of the hardest things for me is knowing that things won't always stay the way I want them to.
+
+I'm still growing, still learning, and still discovering who I am, one little piece at a time.
+
+And one little thing about me? I've always loved the color green. Whatever the reason, green will always have a special place in my heart.
+
+And through it all, I know that life will not always unfold the way I want it to, and I have come to understand that not everything needs to make sense to me right away.
+
+I believe that somehow, everything leads me back to God. In the things I understand and the things I don't, in the moments I wish would last and the changes I never expected, I find comfort in knowing that He remains constant. I may not always understand where life is taking me, but I trust that there is meaning in the journey, even when I cannot see it yet. At the end of the day, beyond everything that changes, God is the one I can always turn to.`;
+
+// GET THE HTML ELEMENTS  
+    const firstMusic = document.getElementById("firstMusic");  
+    const secondMusic = document.getElementById("secondMusic");  
+    const quoteScreen = document.getElementById("quoteScreen");  
+    const more = document.getElementById("more");  
+    const typingText = document.getElementById("typingText");  
+    const cursor = document.getElementById("cursor");  
+
+    let typingTimer = null;  
+    let typingIndex = 0;  
+
+    // TRY TO PLAY THE FIRST SONG  
+    function playFirstMusic() {  
+        // Do not restart the song if it is already playing.  
+        if (!firstMusic.paused) {  
+            return;  
+        }  
+
+        firstMusic.play().catch(function (error) {  
+            console.log(  
+                "The first song could not start. " +  
+                "Check the MP3 filename and try clicking the button again.",  
+                error  
+            );  
+        });  
+    }  
+
+    // TRY AUTOPLAY WHEN THE PAGE LOADS.  
+    // BROWSERS MAY BLOCK AUTOPLAY UNTIL THE VISITOR CLICKS.  
+    window.addEventListener("load", function () {  
+        playFirstMusic();  
+    });  
+
+    // SHOW THE QUOTE SCREEN  
+    function showQuote() {  
+        // Stop and reset the second song.  
+        secondMusic.pause();  
+        secondMusic.currentTime = 0;  
+
+        // Stop any previous typing.  
+        clearInterval(typingTimer);  
+        typingTimer = null;  
+
+        // Reset the personal story.  
+        typingIndex = 0;  
+        typingText.textContent = "";  
+        cursor.style.display = "inline-block";  
+
+        // Show the quote, not the personal story.  
+        more.style.display = "none";  
+        quoteScreen.style.display = "flex";  
+
+        // Start the first song after the button click.  
+        playFirstMusic();  
+    }  
+
+    // OPEN THE PERSONAL STORY AND PLAY SONG TWO  
+    function openMore() {  
+        // Stop the first song.  
+        firstMusic.pause();  
+        firstMusic.currentTime = 0;  
+
+        // Hide the quote and show the personal story.  
+        quoteScreen.style.display = "none";  
+        more.style.display = "flex";  
+
+        // Reset the typing effect.  
+        clearInterval(typingTimer);  
+        typingIndex = 0;  
+        typingText.textContent = "";  
+        cursor.style.display = "inline-block";  
+
+        // Start the second song from the beginning.  
+        secondMusic.pause();  
+        secondMusic.currentTime = 0;  
+
+        secondMusic.play().catch(function (error) {  
+            console.log(  
+                "The second song could not start. " +  
+                "Check that second-song.mp3 exists beside this HTML file.",  
+                error  
+            );  
+        });  
+
+        // Type one character every 100 milliseconds.  
+        typingTimer = setInterval(function () {  
+            if (typingIndex < message.length) {  
+                typingText.textContent += message.charAt(typingIndex);  
+                typingIndex++;  
+
+                // Keep the newest text visible.  
+                more.scrollTop = more.scrollHeight;  
+            } else {  
+                clearInterval(typingTimer);  
+                typingTimer = null;  
+                cursor.style.display = "none";  
+            }  
+        }, 100);  
+    }  
+
+    // RETURN TO THE ABOUT ME PAGE  
+    function closeMore() {  
+        // Hide both overlay screens.  
+        more.style.display = "none";  
+        quoteScreen.style.display = "none";  
+
+        // Stop the second song.  
+        secondMusic.pause();  
+        secondMusic.currentTime = 0;  
+
+        // Stop and reset the typing effect.  
+        clearInterval(typingTimer);  
+        typingTimer = null;  
+
+        typingIndex = 0;  
+        typingText.textContent = "";  
+        cursor.style.display = "inline-block";  
+
+        // Restart the first song after the button click.  
+        firstMusic.currentTime = 0;  
+        playFirstMusic();  
+    }  
+</script>
+
+</body>  
+</html>
